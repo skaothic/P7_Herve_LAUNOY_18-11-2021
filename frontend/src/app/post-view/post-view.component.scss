@@ -1,0 +1,29 @@
+#content {
+    width: 90%;
+}
+
+img {
+    width: auto;
+    align-items: center;
+    max-width: 90%;
+}
+
+#userPic {
+    height: 100px;
+    width: 100px;
+}
+
+a {
+    color: black;
+}
+
+#returnLink i:hover {
+    transform: scale(1.5);
+}
+
+pre {
+    font-size: 1.2em;
+    font-family: cursive;
+    white-space: pre-line;
+    word-break: normal;
+}

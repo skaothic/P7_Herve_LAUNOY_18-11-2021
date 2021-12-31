@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center">
+    <h1 class="text-center mx-4">
+        <strong class="text-decoration-underline">{{post['titre']}}</strong> par {{post['AUTEUR']}} </h1>
+    <img [src]="userPic" alt="photo de profil" id="userPic" class="rounded-circle border border-dark border-5 img-thumbnail rounded">
+</div>
+<div id="content" class="mx-auto col">
+    <p>le {{post['DATE']|date:'dd/MM/YYY à HH:mm'}}</p>
+    <img *ngIf="post['picture_url']!==null" class="mx-auto d-block" [src]="post['picture_url'] " alt="Photo de publication ">
+    <pre class="py-5">{{post['contenu']}}</pre>
+</div>
+<div class="d-flex justify-content-around">
+    <a routerLink="/posts" id="returnLink" class="text-decoration-none">
+        <i class="fas fa-angle-double-left">Retour</i></a>
+    <button (click)="Like(post['id'])" id="likeBtn">
+        <i class="far fa-thumbs-up " *ngIf="!post['like_by']||!post['like_by'].includes(this.userId)"> J'aime</i>
+    <i class="far fa-thumbs-down" *ngIf="post['like_by']&&post['like_by'].includes(this.userId)">Je n'aime plus</i>
+    <span>  {{post['like_nb']}} <i class="fas fa-heart"></i></span>
+</button>
+    <button class="alert alert-danger border border-danger rounded-circle" *ngIf="post['user_id']==this.userId||this.userId=='1' " (click)="deletePost(post['id'])" id="delBtn"><i class="fas fa-trash "></i></button>
+</div>
+<h2 class="text-center">Commentaires</h2>
+<form class="w-75 mx-auto" [formGroup]="addComment" (ngSubmit)="newComment(post['id'])">
+    <div class="colauto">
+        <label for="content" class="form-label"> </label>
+        <textarea (keyup)="autogrow()" id="commentContent" formControlName="commentContent" rows="3" cols="100" placeholder="Exprimez vous..." class="w-100"></textarea>
+    </div>
+    <button type="submit" class="mb-5">Valider</button></form>
+<ul class="col list-group ml-4">
+    <li *ngFor="let comment of commentsList;let i=index" class="my-3 mx-4 border-0  list-group-item">
+        <h4>par {{comment.AUTEUR}} le {{comment.DATE|date:'dd/MM/YYY à HH:mm'}}</h4>
+        <pre class="text-break w-100 mx-auto my-4">{{comment.contenu}}</pre>
+        <span>
+            <button (click)="LikeComment(post['id'],comment.ID)" id="likeBtn" class="mx-3">
+            <i class="far fa-thumbs-down" *ngIf="comment.like_by.includes(this.userId)"> Je n'aime plus</i>
+            <i class="far fa-thumbs-up " *ngIf="!comment.like_by.includes(this.userId)"> J'aime</i>
+            <span> {{comment.like_nb}} <i class="fas fa-heart"></i></span>
+        </button>
+
+        </span>
+        <button class="alert alert-danger border border-danger rounded-circle" id="delBtn" *ngIf="comment.user_id==this.userId||this.userId=='1'" (click)="deleteComment(post['id'],comment.ID)"><i class="fas fa-trash "></i></button>
+    </li>
+</ul>

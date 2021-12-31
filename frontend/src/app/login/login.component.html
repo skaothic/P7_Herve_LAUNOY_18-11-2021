@@ -1,0 +1,13 @@
+<div class="bg-light col-8 mx-auto">
+    <form [formGroup]="loginForm" (ngSubmit)="logIn()">
+        <div class="col-auto">
+            <label for="email" class="form-label">Adresse email</label>
+            <input class="form-control" type="email" class="form-control" formControlName="email">
+        </div>
+        <div class="col-auto">
+            <label for="password" class="form-label">Mot de passe</label>
+            <input class="form-control" type="password" formControlName="password">
+        </div>
+        <button type="submit" class="mt-3" [disabled]="!loginForm.valid">Connexion</button>
+    </form>
+</div>

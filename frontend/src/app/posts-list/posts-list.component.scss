@@ -1,0 +1,45 @@
+a {
+    color: black;
+    font-size: large;
+    width: fit-content;
+    height: fit-content;
+}
+
+img {
+    margin: 20px;
+    width: 100%;
+}
+
+pre {
+    font-family: cursive;
+    margin: 15px auto;
+    width: 90%;
+    white-space: pre-line;
+    word-break: normal;
+}
+
+#newPost {
+    width: 90%;
+    margin: 10px auto;
+    height: fit-content;
+}
+
+main {
+    background-image: url("../../assets/logos/icon.png");
+    background-size: cover;
+    background-position: center;
+}
+
+#fileInput {
+    margin: 10px auto;
+}
+
+#title {
+    font-size: 24px;
+    margin-bottom: 15px;
+    width: fit-content;
+}
+
+#commentLink i:hover {
+    transform: scale(1.5);
+}

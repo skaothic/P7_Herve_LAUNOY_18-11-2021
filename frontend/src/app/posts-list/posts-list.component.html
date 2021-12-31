@@ -1,0 +1,42 @@
+<main>
+    <section class="pt-5">
+        <h1 class="text-center">Les derniers posts</h1>
+        <p class="text-center">Quoi de neuf pour vous?</p>
+        <form [formGroup]="addPost" (ngSubmit)="newPost()" id="newPost">
+            <div class="col-auto">
+                <label for="titre" class="form-label">Titre</label>
+                <input type="text" class="form-control" formControlName="titre">
+            </div>
+            <div class="colauto">
+                <label for="content" class="form-label"> </label>
+                <textarea formControlName="content" id="content" cols="100" rows="3" placeholder="Exprimez vous..." class="form-control" id="content" (keyup)="autogrow()"></textarea>
+            </div>
+            <input id="fileInput" type='file' accept="image/*" name="file" class="form-control w-50" formControlName="file" (change)="onFileSelect($event)">
+            <button type="submit" [disabled]="!addPost.valid">Valider</button>
+        </form>
+    </section>
+    <section>
+        <div *ngFor="let post of postList" class=" opacity-75 d-flex justify-content-between border col-lg-6 col-sd-8 border-dark rounded mx-auto  p-3 mb-2 bg-white">
+            <div class="d-flex flex-column justify-content-between">
+                <p id="title">{{post.AUTEUR}}</p>
+                <div class="col align-self-end">le {{post.DATE|date:'dd/MM/YYY'}}</div>
+                <button class="alert alert-danger border border-danger rounded-circle " *ngIf="post.user_id==this.userId||this.userId=='1' " (click)=deletePost(post.id) id="delBtn"><i class="fas fa-trash "></i></button>
+            </div>
+            <a [routerLink]="[ '/posts',post.id] " class="d-flex flex-column justify-content-between text-decoration-none w-100 h-auto" id="commentLink">
+                <h2 class="text-center mb-3 text-decoration-underline">{{post.titre}}</h2>
+                <img *ngIf="post.picture_url!==null" [src]="post.picture_url " alt="Photo de publication ">
+
+                <pre id="contenu">{{post.contenu}}</pre>
+
+                <p class="text-start align-bottom"> <i class="fas fa-angle-double-right"> Voir les commentaires </i></p>
+            </a>
+            <div class="d-flex flex-column-reverse">
+                <button (click)="Like(post.id)" class="align-bottom" id="likeBtn">
+                <p class="mb-0">{{post.like_nb}}    <i class="fas fa-heart"></i></p>
+                <i class="far fa-thumbs-up " *ngIf="!post.like_by.includes(this.userId)">   J'aime</i>
+            <i class="far fa-thumbs-down" *ngIf="post.like_by.includes(this.userId)">   Je n'aime plus</i>
+            </button>
+            </div>
+        </div>
+    </section>
+</main>

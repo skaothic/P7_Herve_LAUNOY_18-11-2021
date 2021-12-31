@@ -1,0 +1,16 @@
+<header class="bg-light">
+    <div class="d-flex justify-content-between">
+        <img src="../../assets/logos/icon-left-font.png" class="w-50">
+        <h1 class="mx-4">Bienvenue sur votre forum </h1>
+    </div>
+    <nav class="navbar navbar-light">
+        <div class="navbar-header mx-auto">
+            <ul class="list-group d-flex flex-row">
+                <li *ngIf="authservice.isAuth==false" routerLinkactive="active" class="list-group-item rounded"><button routerLink='newUser' class="mw-100 rounded">S'incrire</button></li>
+                <li *ngIf="authservice.isAuth==false" class="list-group-item rounded"><button routerLink='login' class="mw-100 rounded">Se connecter</button></li>
+                <li *ngIf="authservice.isAuth==true" class="list-group-item rounded"><button (click)='logOut()' class="mw-100 rounded">Déconnexion</button></li>
+                <li *ngIf="authservice.isAuth==true" class="list-group-item rounded"><button routerLink="user/current" class="mw-100 rounded">Modifier vos données utilisateurs</button></li>
+            </ul>
+        </div>
+    </nav>
+</header>

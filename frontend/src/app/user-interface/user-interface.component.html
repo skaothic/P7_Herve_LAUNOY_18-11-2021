@@ -1,0 +1,45 @@
+<div class="mx-4">
+    <h1>{{prenom}} {{nom}}</h1>
+    <p>Inscrit(e) le {{date}}</p>
+    <a routerLink="/posts" class="text-decoration-none text-reset" id="returnLink"><i class="fas fa-angle-double-left">  Retour</i></a>
+    <form [formGroup]="uploadForm" (ngSubmit)="updatePic()">
+        <label for="fileInput">
+    <img [src]="image" alt="photo de profil" class="rounded-circle border border-dark border-5 img-thumbnail rounded float-start">
+    <input id="fileInput" 
+    value="changer votre photo"
+    type='file' 
+    accept="image/*"
+    name="file"
+    class="mx-auto"
+    (change)="onFileSelect($event)"
+    (validate)="updatePic()">
+    <button type="submit">Envoyer votre photo</button>
+  </label>
+    </form>
+</div>
+<div class="d-flex justify-content-around">
+    <h2 class="mx-4">Modifier votre profil</h2>
+    <form [formGroup]="updateForm " (ngSubmit)="updateUser() ">
+        <label for="prenom " class="form-label">Modifier votre prénom</label>
+        <input type="text " [value]="prenom" id="prenom " class="form-control " formControlName="prenom">
+        <label for="nom " class="form-label ">Modifier votre nom</label>
+        <input type="text " id="nom " [value]="nom" class="form-control " formControlName="nom">
+        <button class="my-2" type="submit ">Envoyer vos modifications</button>
+        <p *ngIf="show==1">Votre profil a été modifié</p>
+    </form>
+    <h2 class="mx-4">Changer votre mot de passe</h2>
+    <form [formGroup]="changePassForm" (ngSubmit)="changePass()">
+        <label for="oldPass" class="form-label">Ancien mot de passe</label>
+        <input type="password" id="oldPass" [ngClass]="{'form-control':true,'alert-danger':show==2}" formControlName="oldPass">
+        <label for="newPass" class="form-label">Nouveau mot de passe</label>
+        <input type="password" id="newPass" [ngClass]="{'form-control':true,'alert-warning':show==3}" formControlName="newPass">
+        <label for="newPassConf" class="form-label">Confirmation nouveau mot de passe</label>
+        <input type="password" id="newPassConf" [ngClass]="{'form-control':true,'alert-warning':show==3}" formControlName="newPassConf">
+        <button type="submit" class="my-2"> Envoyer vos modifications</button>
+        <p *ngIf="show==2">Votre ancien mot de passe est incorrect</p>
+        <p *ngIf="show==3">Vos nouveaux mots de passe ne correspondent pas</p>
+        <p *ngIf="show==4">Votre mot de passe a été modifié</p>
+    </form>
+</div>
+
+<button class="alert alert-danger btn btn-outline-danger mx-4" (click)="deleteProfile()"> supprimer son compte</button>

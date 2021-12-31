@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+    background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+}
+
+#delBtn {
+    width: 60px;
+}
+
+#likeBtn {
+    width: 180px;
+    height: fit-content;
+    @media screen and (max-width: 768px) {
+        width: fit-content;
+    }
+}
