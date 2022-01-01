@@ -5,14 +5,16 @@
         <form [formGroup]="addPost" (ngSubmit)="newPost()" id="newPost">
             <div class="col-auto">
                 <label for="titre" class="form-label">Titre</label>
-                <input type="text" class="form-control" formControlName="titre">
+                <input type="text" class="form-control" formControlName="titre" id="titre">
             </div>
             <div class="colauto">
-                <label for="content" class="form-label"> </label>
-                <textarea formControlName="content" id="content" cols="100" rows="3" placeholder="Exprimez vous..." class="form-control" id="content" (keyup)="autogrow()"></textarea>
+                <label for="content" class="form-label" hidden>Contenu</label>
+                <textarea formControlName="content" id="content" cols="100" rows="3" placeholder="Exprimez vous..." class="form-control my-4" id="content" (keyup)="autogrow()"></textarea>
             </div>
+            <label for="fileInput" hidden>Ajouter une photo</label>
             <input id="fileInput" type='file' accept="image/*" name="file" class="form-control w-50" formControlName="file" (change)="onFileSelect($event)">
-            <button type="submit" [disabled]="!addPost.valid">Valider</button>
+            <label for="submit" hidden>Valider la publication</label>
+            <button type="submit" [disabled]="!addPost.valid" id="submit">Valider</button>
         </form>
     </section>
     <section>
@@ -20,7 +22,7 @@
             <div class="d-flex flex-column justify-content-between">
                 <p id="title">{{post.AUTEUR}}</p>
                 <div class="col align-self-end">le {{post.DATE|date:'dd/MM/YYY'}}</div>
-                <button class="alert alert-danger border border-danger rounded-circle " *ngIf="post.user_id==this.userId||this.userId=='1' " (click)=deletePost(post.id) id="delBtn"><i class="fas fa-trash "></i></button>
+                <button class="alert alert-danger border border-danger rounded-circle " *ngIf="post.user_id==this.userId||this.userId=='1' " (click)=deletePost(post.id) id="delBtn"><p hidden>Supprimer la Publication</p><i class="fas fa-trash "></i></button>
             </div>
             <a [routerLink]="[ '/posts',post.id] " class="d-flex flex-column justify-content-between text-decoration-none w-100 h-auto" id="commentLink">
                 <h2 class="text-center mb-3 text-decoration-underline">{{post.titre}}</h2>

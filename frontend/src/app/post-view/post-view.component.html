@@ -16,18 +16,18 @@
     <i class="far fa-thumbs-down" *ngIf="post['like_by']&&post['like_by'].includes(this.userId)">Je n'aime plus</i>
     <span>  {{post['like_nb']}} <i class="fas fa-heart"></i></span>
 </button>
-    <button class="alert alert-danger border border-danger rounded-circle" *ngIf="post['user_id']==this.userId||this.userId=='1' " (click)="deletePost(post['id'])" id="delBtn"><i class="fas fa-trash "></i></button>
+    <button class="alert alert-danger border border-danger rounded-circle" *ngIf="post['user_id']==this.userId||this.userId=='1' " (click)="deletePost(post['id'])" id="delBtn"><p hidden>Supprimer la Publication</p><i class="fas fa-trash "></i></button>
 </div>
 <h2 class="text-center">Commentaires</h2>
 <form class="w-75 mx-auto" [formGroup]="addComment" (ngSubmit)="newComment(post['id'])">
     <div class="colauto">
-        <label for="content" class="form-label"> </label>
+        <label for="commentContent" class="form-label" hidden>Ajoutez un commentaire</label>
         <textarea (keyup)="autogrow()" id="commentContent" formControlName="commentContent" rows="3" cols="100" placeholder="Exprimez vous..." class="w-100"></textarea>
     </div>
     <button type="submit" class="mb-5">Valider</button></form>
 <ul class="col list-group ml-4">
     <li *ngFor="let comment of commentsList;let i=index" class="my-3 mx-4 border-0  list-group-item">
-        <h4>par {{comment.AUTEUR}} le {{comment.DATE|date:'dd/MM/YYY à HH:mm'}}</h4>
+        <h3>par {{comment.AUTEUR}} le {{comment.DATE|date:'dd/MM/YYY à HH:mm'}}</h3>
         <pre class="text-break w-100 mx-auto my-4">{{comment.contenu}}</pre>
         <span>
             <button (click)="LikeComment(post['id'],comment.ID)" id="likeBtn" class="mx-3">
@@ -37,6 +37,6 @@
         </button>
 
         </span>
-        <button class="alert alert-danger border border-danger rounded-circle" id="delBtn" *ngIf="comment.user_id==this.userId||this.userId=='1'" (click)="deleteComment(post['id'],comment.ID)"><i class="fas fa-trash "></i></button>
+        <button class="alert alert-danger border border-danger rounded-circle" id="delBtn" *ngIf="comment.user_id==this.userId||this.userId=='1'" (click)="deleteComment(post['id'],comment.ID)"><p hidden>Supprimer le commentaire</p><i class="fas fa-trash "></i></button>
     </li>
 </ul>

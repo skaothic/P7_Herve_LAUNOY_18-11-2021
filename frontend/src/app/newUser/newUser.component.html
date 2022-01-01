@@ -1,23 +1,23 @@
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="col-8 mx-auto">
     <div class="col-auto">
         <label for="firstName" class="form-label">Prénom</label>
-        <input class="form-control" type="text" formControlName="firstName" required>
+        <input class="form-control" type="text" formControlName="firstName" id="firstName">
     </div>
     <div class="col-auto">
         <label for="lastName" class="form-label">Nom</label>
-        <input class="form-control" type="text" formControlName="lastName">
+        <input class="form-control" type="text" formControlName="lastName" id="lastName">
     </div>
     <div class="col-auto">
         <label for="email" class="form-label">Adresse email</label>
-        <input class="form-control" type="email" formControlName="email">
+        <input class="form-control" type="email" formControlName="email" id="email">
     </div>
     <div class="col-auto">
         <label for="password" class="form-label">Mot de passe</label>
-        <input class="form-control" type="password" formControlName="password" placeholder="minimum 6 caractères alphanumériques minimum 1 chiffre (pas d 'espaces)">
+        <input class="form-control" type="password" id="password" formControlName="password" placeholder="minimum 6 caractères alphanumériques minimum 1 chiffre (pas d 'espaces)">
     </div>
     <div class="col-auto">
         <label for="passwordConfirm" class="form-label">Confirmation mot de passe</label>
-        <input class="form-control" type="password" formControlName="passwordConfirm">
+        <input class="form-control" type="password" formControlName="passwordConfirm" id="passwordConfirm">
     </div>
 
     <button type="submit" [disabled]="!userForm.valid">S'enregistrer</button>

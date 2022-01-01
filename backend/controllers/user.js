@@ -127,10 +127,10 @@ exports.updateUser = (req, res, next) => {
             if (error) {
                 res.status(500).json({ "error": error })
             } else {
-                res.status(201).json({ message: "modifié", prenom, nom })
+                res.status(201).json(results)
             }
         })
-    } else if (req.body.prenom) {
+    } else if (!req.body.nom) {
         const prenom = req.body.prenom
 
         const sql = `update user set prenom ="${prenom}" where id ="${who}"`
@@ -138,17 +138,17 @@ exports.updateUser = (req, res, next) => {
             if (error) {
                 res.status(500).json({ "error": error })
             } else {
-                res.status(201).json({ message: "modifié", prenom })
+                res.status(201).json(results)
             }
         })
-    } else if (req.body.nom) {
+    } else if (!req.body.prenom) {
         const nom = req.body.nom
         const sql = `update user set nom ="${nom}" where id ="${who}"`
         db.execute(sql, function(error, results, fields) {
             if (error) {
                 res.status(500).json({ "error": error })
             } else {
-                res.status(201).json({ message: "modifié", nom })
+                res.status(201).json(results)
             }
         })
 
