@@ -22,6 +22,7 @@ export class UserInterfaceComponent implements OnInit{
     nom:new FormControl
   })
   public uploadForm:FormGroup;
+
   public changePassForm=new FormGroup({
     oldPass:new FormControl,
     newPass:new FormControl,
@@ -118,7 +119,8 @@ this.userService.passwordChange(oldPass,newPass,newPassConf)
   }
   else if(res.status===403){
     this.show=2
-    console.error}
+    console.error
+  }
     else if(res.status===405){
       this.show=3
       console.error
